@@ -1,25 +1,30 @@
 # python simple Dijkstra
 
 def dijkstra(graph, start):
-    distances = {node: float('infinity') for node in graph}
-    distances[start] = 0
+    distances = {node: {
+            'dist': float('infinity'), 
+            'path': []
+        } for node in graph}
+    distances[start]['dist'] = 0
     unvisited = list(graph.keys())
 
-    nodes_visited = {node: [] for node in graph}
     while unvisited:
-        # Find the node with the smallest distance
-        current_node = min(unvisited, key=lambda node: distances[node])
+        current_node = min(unvisited, key=lambda node: distances[node]['dist'])
+
+        for neighbor, weight in graph[current_node].items():
+            distance = distances[current_node]['dist'] + weight
+            # print(f'Current node: {current_node}:\nNeighbor: {neighbor} - Distance: {distance} - Path: {distances[current_node]["path"]}\n')
+            if distance < distances[neighbor]['dist']:
+                distances[neighbor]['dist'] = distance
+                distances[neighbor]['path'] = distances[current_node]['path'] +\
+                    ([current_node] if current_node != start else [])
 
         unvisited.remove(current_node)
 
-        for neighbor, weight in graph[current_node].items():
-            distance = distances[current_node] + weight
+    return distances
 
-            if distance < distances[neighbor]:
-                distances[neighbor] = distance
-                nodes_visited[neighbor].append(current_node)
 
-    return distances, nodes_visited
+
 
 graphs = [
     {
@@ -34,7 +39,7 @@ graphs = [
         'D': {'B': 2, 'C': 6}
     }, {
         'A': {'B': 2, 'C': 4},
-        'B': {'C': 1, 'D': 4, 'E': 2},
+        'B': {'C': 1, 'D': 4, 'E': 2, 'A': 2},
         'C': {'A': 4, 'B': 1, 'E': 3},
         'D': {'B': 4, 'E': 3, 'F': 2},
         'E': {'B': 2, 'C': 3, 'D': 3, 'F': 2},
@@ -56,5 +61,8 @@ for i, graph in enumerate(graphs):
 
     print(f'Graph {i + 1}:')
     for node in nodes:
-        distances, nodes_visited = dijkstra(graph, node)
-        print(f'Node {node}:\nDistances: {distances}\nNodes visited: {nodes_visited}\n')
+        distances = dijkstra(graph, node)
+        print(f'Node {node}:')
+        for element in distances:
+            print(f'\t- {element} - distance {distances[element]["dist"]} - path {distances[element]["path"]}')
+        print()

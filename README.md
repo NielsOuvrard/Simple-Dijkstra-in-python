@@ -14,20 +14,28 @@ The algorithm works by keeping track of the currently known shortest distance fr
 
 ```python
 Node A:
-Distances: {'A': 0, 'B': 3, 'C': 5, 'D': 4}
-Nodes_visited: {'A': [], 'B': ['A'], 'C': ['A'], 'D': ['B']}
+        - A - distance 0 - path []
+        - B - distance 3 - path []
+        - C - distance 5 - path []
+        - D - distance 4 - path ['B']
 
 Node B:
-Distances: {'A': 3, 'B': 0, 'C': 3, 'D': 1}
-Nodes_visited: {'A': ['B'], 'B': [], 'C': ['B', 'D'], 'D': ['B']}
+        - A - distance 3 - path []
+        - B - distance 0 - path []
+        - C - distance 3 - path ['D']
+        - D - distance 1 - path []
 
 Node C:
-Distances: {'A': 5, 'B': 3, 'C': 0, 'D': 2}
-Nodes_visited: {'A': ['C'], 'B': ['C', 'D'], 'C': [], 'D': ['C']}
+        - A - distance 5 - path []
+        - B - distance 3 - path ['D']
+        - C - distance 0 - path []
+        - D - distance 2 - path []
 
 Node D:
-Distances: {'A': 4, 'B': 1, 'C': 2, 'D': 0}
-Nodes_visited: {'A': ['B'], 'B': ['D'], 'C': ['D'], 'D': []}
+        - A - distance 4 - path ['B']
+        - B - distance 1 - path []
+        - C - distance 2 - path []
+        - D - distance 0 - path []
 ```
 
 ## Exercice 2
@@ -36,20 +44,28 @@ Nodes_visited: {'A': ['B'], 'B': ['D'], 'C': ['D'], 'D': []}
 
 ```python
 Node A:
-Distances: {'A': 0, 'B': 5, 'C': 7, 'D': 7}
-Nodes_visited: {'A': [], 'B': ['A'], 'C': ['A', 'B'], 'D': ['B']}
+        - A - distance 0 - path []
+        - B - distance 5 - path []
+        - C - distance 7 - path ['B']
+        - D - distance 7 - path ['B']
 
 Node B:
-Distances: {'A': 5, 'B': 0, 'C': 2, 'D': 2}
-Nodes_visited: {'A': ['B'], 'B': [], 'C': ['B'], 'D': ['B']}
+        - A - distance 5 - path []
+        - B - distance 0 - path []
+        - C - distance 2 - path []
+        - D - distance 2 - path []
 
 Node C:
-Distances: {'A': 7, 'B': 2, 'C': 0, 'D': 4}
-Nodes_visited: {'A': ['C', 'B'], 'B': ['C'], 'C': [], 'D': ['C', 'B']}
+        - A - distance 7 - path ['B']
+        - B - distance 2 - path []
+        - C - distance 0 - path []
+        - D - distance 4 - path ['B']
 
 Node D:
-Distances: {'A': 7, 'B': 2, 'C': 4, 'D': 0}
-Nodes_visited: {'A': ['B'], 'B': ['D'], 'C': ['D', 'B'], 'D': []}
+        - A - distance 7 - path ['B']
+        - B - distance 2 - path []
+        - C - distance 4 - path ['B']
+        - D - distance 0 - path []
 ```
 
 ## Exercice 3
@@ -58,28 +74,52 @@ Nodes_visited: {'A': ['B'], 'B': ['D'], 'C': ['D', 'B'], 'D': []}
 
 ```python
 Node A:
-Distances: {'A': 0, 'B': 2, 'C': 3, 'D': 6, 'E': 4, 'F': 6}
-Nodes_visited: {'A': [], 'B': ['A'], 'C': ['A', 'B'], 'D': ['B'], 'E': ['B'], 'F': ['E']}
+        - A - distance 0 - path []
+        - B - distance 2 - path []
+        - C - distance 3 - path ['B']
+        - D - distance 6 - path ['B']
+        - E - distance 4 - path ['B']
+        - F - distance 6 - path ['B', 'E']
 
 Node B:
-Distances: {'A': 5, 'B': 0, 'C': 1, 'D': 4, 'E': 2, 'F': 4}
-Nodes_visited: {'A': ['C'], 'B': [], 'C': ['B'], 'D': ['B'], 'E': ['B'], 'F': ['E']}
+        - A - distance 2 - path []
+        - B - distance 0 - path []
+        - C - distance 1 - path []
+        - D - distance 4 - path []
+        - E - distance 2 - path []
+        - F - distance 4 - path ['E']
 
 Node C:
-Distances: {'A': 4, 'B': 1, 'C': 0, 'D': 5, 'E': 3, 'F': 5}
-Nodes_visited: {'A': ['C'], 'B': ['C'], 'C': [], 'D': ['B'], 'E': ['C'], 'F': ['E']}
+        - A - distance 3 - path ['B']
+        - B - distance 1 - path []
+        - C - distance 0 - path []
+        - D - distance 5 - path ['B']
+        - E - distance 3 - path []
+        - F - distance 5 - path ['E']
 
 Node D:
-Distances: {'A': 9, 'B': 4, 'C': 5, 'D': 0, 'E': 3, 'F': 2}
-Nodes_visited: {'A': ['C'], 'B': ['D'], 'C': ['E', 'B'], 'D': [], 'E': ['D'], 'F': ['D']}
+        - A - distance 6 - path ['B']
+        - B - distance 4 - path []
+        - C - distance 5 - path ['B']
+        - D - distance 0 - path []
+        - E - distance 3 - path []
+        - F - distance 2 - path []
 
 Node E:
-Distances: {'A': 7, 'B': 2, 'C': 3, 'D': 3, 'E': 0, 'F': 2}
-Nodes_visited: {'A': ['C'], 'B': ['E'], 'C': ['E'], 'D': ['E'], 'E': [], 'F': ['E']}
+        - A - distance 4 - path ['B']
+        - B - distance 2 - path []
+        - C - distance 3 - path []
+        - D - distance 3 - path []
+        - E - distance 0 - path []
+        - F - distance 2 - path []
 
 Node F:
-Distances: {'A': 9, 'B': 4, 'C': 5, 'D': 2, 'E': 2, 'F': 0}
-Nodes_visited: {'A': ['C'], 'B': ['D', 'E'], 'C': ['E'], 'D': ['F'], 'E': ['F'], 'F': []}
+        - A - distance 6 - path ['E', 'B']
+        - B - distance 4 - path ['E']
+        - C - distance 5 - path ['E']
+        - D - distance 2 - path []
+        - E - distance 2 - path []
+        - F - distance 0 - path []
 ```
 
 ## Exercice 4
@@ -88,34 +128,82 @@ Nodes_visited: {'A': ['C'], 'B': ['D', 'E'], 'C': ['E'], 'D': ['F'], 'E': ['F'],
 
 ```python
 Node A:
-Distances: {'A': 0, 'B': 10, 'C': 2, 'D': 7, 'E': 10, 'F': 14, 'G': 13, 'H': 11}
-Nodes_visited: {'A': [], 'B': ['A'], 'C': ['A'], 'D': ['C'], 'E': ['D'], 'F': ['E'], 'G': ['H'], 'H': ['B']}
+        - A - distance 0 - path []
+        - B - distance 10 - path []
+        - C - distance 2 - path []
+        - D - distance 7 - path ['C']
+        - E - distance 10 - path ['C', 'D']
+        - F - distance 14 - path ['C', 'D', 'E']
+        - G - distance 13 - path ['B', 'H']
+        - H - distance 11 - path ['B']
 
 Node B:
-Distances: {'A': 10, 'B': 0, 'C': 12, 'D': 11, 'E': 8, 'F': 4, 'G': 3, 'H': 1}
-Nodes_visited: {'A': ['B'], 'B': [], 'C': ['A'], 'D': ['E'], 'E': ['F'], 'F': ['G'], 'G': ['H'], 'H': ['B']}
+        - A - distance 10 - path []
+        - B - distance 0 - path []
+        - C - distance 12 - path ['A']
+        - D - distance 11 - path ['H', 'G', 'F', 'E']
+        - E - distance 8 - path ['H', 'G', 'F']
+        - F - distance 4 - path ['H', 'G']
+        - G - distance 3 - path ['H']
+        - H - distance 1 - path []
 
 Node C:
-Distances: {'A': 2, 'B': 12, 'C': 0, 'D': 5, 'E': 8, 'F': 12, 'G': 13, 'H': 13}
-Nodes_visited: {'A': ['C'], 'B': ['A'], 'C': [], 'D': ['C'], 'E': ['D'], 'F': ['E'], 'G': ['F'], 'H': ['B']}
+        - A - distance 2 - path []
+        - B - distance 12 - path ['A']
+        - C - distance 0 - path []
+        - D - distance 5 - path []
+        - E - distance 8 - path ['D']
+        - F - distance 12 - path ['D', 'E']
+        - G - distance 13 - path ['D', 'E', 'F']
+        - H - distance 13 - path ['A', 'B']
 
 Node D:
-Distances: {'A': 7, 'B': 11, 'C': 5, 'D': 0, 'E': 3, 'F': 7, 'G': 8, 'H': 10}
-Nodes_visited: {'A': ['C'], 'B': ['A', 'H'], 'C': ['D'], 'D': [], 'E': ['D'], 'F': ['E'], 'G': ['F'], 'H': ['G']}
+        - A - distance 7 - path ['C']
+        - B - distance 11 - path ['E', 'F', 'G', 'H']
+        - C - distance 5 - path []
+        - D - distance 0 - path []
+        - E - distance 3 - path []
+        - F - distance 7 - path ['E']
+        - G - distance 8 - path ['E', 'F']
+        - H - distance 10 - path ['E', 'F', 'G']
 
 Node E:
-Distances: {'A': 10, 'B': 8, 'C': 8, 'D': 3, 'E': 0, 'F': 4, 'G': 5, 'H': 7}
-Nodes_visited: {'A': ['B', 'C'], 'B': ['H'], 'C': ['D'], 'D': ['E'], 'E': [], 'F': ['E'], 'G': ['F'], 'H': ['G']}
+        - A - distance 10 - path ['D', 'C']
+        - B - distance 8 - path ['F', 'G', 'H']
+        - C - distance 8 - path ['D']
+        - D - distance 3 - path []
+        - E - distance 0 - path []
+        - F - distance 4 - path []
+        - G - distance 5 - path ['F']
+        - H - distance 7 - path ['F', 'G']
 
 Node F:
-Distances: {'A': 14, 'B': 4, 'C': 12, 'D': 7, 'E': 4, 'F': 0, 'G': 1, 'H': 3}
-Nodes_visited: {'A': ['B'], 'B': ['H'], 'C': ['D'], 'D': ['E'], 'E': ['F'], 'F': [], 'G': ['F'], 'H': ['G']}
+        - A - distance 14 - path ['G', 'H', 'B']
+        - B - distance 4 - path ['G', 'H']
+        - C - distance 12 - path ['E', 'D']
+        - D - distance 7 - path ['E']
+        - E - distance 4 - path []
+        - F - distance 0 - path []
+        - G - distance 1 - path []
+        - H - distance 3 - path ['G']
 
 Node G:
-Distances: {'A': 13, 'B': 3, 'C': 13, 'D': 8, 'E': 5, 'F': 1, 'G': 0, 'H': 2}
-Nodes_visited: {'A': ['B'], 'B': ['H'], 'C': ['D'], 'D': ['E'], 'E': ['F'], 'F': ['G'], 'G': [], 'H': ['G']}
+        - A - distance 13 - path ['H', 'B']
+        - B - distance 3 - path ['H']
+        - C - distance 13 - path ['F', 'E', 'D']
+        - D - distance 8 - path ['F', 'E']
+        - E - distance 5 - path ['F']
+        - F - distance 1 - path []
+        - G - distance 0 - path []
+        - H - distance 2 - path []
 
 Node H:
-Distances: {'A': 11, 'B': 1, 'C': 13, 'D': 10, 'E': 7, 'F': 3, 'G': 2, 'H': 0}
-Nodes_visited: {'A': ['B'], 'B': ['H'], 'C': ['D', 'A'], 'D': ['E'], 'E': ['F'], 'F': ['G'], 'G': ['H'], 'H': []}
+        - A - distance 11 - path ['B']
+        - B - distance 1 - path []
+        - C - distance 13 - path ['B', 'A']
+        - D - distance 10 - path ['G', 'F', 'E']
+        - E - distance 7 - path ['G', 'F']
+        - F - distance 3 - path ['G']
+        - G - distance 2 - path []
+        - H - distance 0 - path []
 ```
