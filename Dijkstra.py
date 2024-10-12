@@ -1,24 +1,46 @@
 # python simple Dijkstra
 
+def list_to_nice_string(l):
+    return '-' + '-'.join([str(x) for x in l]) + ('-' if l else '')
+
 def dijkstra(graph, start):
+    # STEP 1: Create a dictionary with the distances equal to infinity
+    # except for the start node, which is 0
     distances = {node: {
             'dist': float('infinity'), 
             'path': []
         } for node in graph}
     distances[start]['dist'] = 0
+    
+    # STEP 2: Create a list of unvisited nodes
     unvisited = list(graph.keys())
 
+    # STEP 3: Loop until all nodes have been visited
     while unvisited:
+
+        # STEP 4: Select the unvisited node with the smallest distance
         current_node = min(unvisited, key=lambda node: distances[node]['dist'])
 
+        print(('Starting from:' if current_node == start else 'Visiting:'), current_node)
+        to_print = ''
+
+        # STEP 5: For the current node, calculate the distance to each neighbor
         for neighbor, weight in graph[current_node].items():
             distance = distances[current_node]['dist'] + weight
-            # print(f'Current node: {current_node}:\nNeighbor: {neighbor} - Distance: {distance} - Path: {distances[current_node]["path"]}\n')
+
+            # STEP 6: If the distance is shorter than the current distance, update it
             if distance < distances[neighbor]['dist']:
+                if distances[neighbor]['dist'] != float('infinity'):
+                    to_print += f'Updating distance of {neighbor} from {distances[neighbor]["dist"]} to {distance}\n'
+                    to_print += f'\tOld path: {start}{list_to_nice_string(distances[neighbor]["path"])}{neighbor} = {distances[neighbor]["dist"]}\n'
+                    to_print += f'\tNew path: {start}{list_to_nice_string(distances[current_node]["path"])}{current_node}-{neighbor} = {distance}\n'
+                else:
+                    to_print += f'Setting distance of {neighbor} to {distance}\n'
                 distances[neighbor]['dist'] = distance
                 distances[neighbor]['path'] = distances[current_node]['path'] +\
                     ([current_node] if current_node != start else [])
-
+        
+        print(to_print if to_print else 'No changes\n')
         unvisited.remove(current_node)
 
     return distances
@@ -59,10 +81,15 @@ graphs = [
 for i, graph in enumerate(graphs):
     nodes = graph.keys()
 
-    print(f'Graph {i + 1}:')
+    print(f'\033[92mGraph {i + 1}:\033[0m')
     for node in nodes:
-        distances = dijkstra(graph, node)
-        print(f'Node {node}:')
-        for element in distances:
-            print(f'\t- {element} - distance {distances[element]["dist"]} - path {distances[element]["path"]}')
-        print()
+        print(f'\033[94mNode {node}:\033[0m')
+        
+        data = dijkstra(graph, node)
+        
+        print('Results:')
+        for element in data:
+            path = list_to_nice_string(data[element]["path"])
+            print(f'\t{node}-{element}:\tdistance {data[element]["dist"]}\tpath {node}{path}{element}')
+        print('\n')
+
